@@ -31,8 +31,12 @@
 				<Switch Alignment="Left" />
 			</StackPanel>
 		</ScrollView>
-	</DockPanel>
+
+
 	<Rectangle Fill="#000" Width="100" Height="100"/>
 	
+
+	</DockPanel> -->
+
 </App>
 
