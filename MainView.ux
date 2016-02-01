@@ -1,0 +1,37 @@
+<App Theme="Basic" Background="#fff000">
+	<StackPanel>
+		<Button Text="a"  Width="100" Height="100"/>
+		<Button Text="b"  Width="100" Height="100"/>
+		<Button Text="c"/>
+		<Button Text="d"/>
+	</StackPanel>
+<!-- 	<MyNewGraphicsTheme ux:Global="MyGraphics" />
+	<DockPanel>
+		<JavaScript>
+    var Observable = require('FuseJS/Observable');
+    var buttontext = Observable('Gateau');
+    var clickcount = 0;
+
+    function click() {
+        buttontext.value = 'J\'ai mange: ' + ++clickcount + ' gateaux';
+
+    }
+
+   module.exports = {
+            buttontext : buttontext,
+            click : click
+        }
+</JavaScript>
+		<StatusBarBackground Dock="Top"/>
+		<ScrollView ClipToBounds="true">
+			<StackPanel>
+				<Slider/>
+				<Button Text="{buttontext}" Clicked="{click}">
+				</Button>
+				<Switch Alignment="Left" />
+			</StackPanel>
+		</ScrollView>
+	</DockPanel> -->
+	<!-- <Rectangle Fill="#000" Width="100" Height="100"/> -->
+</App>
+
