@@ -1,27 +1,25 @@
 <App Theme="Basic" Background="#fff000">
-	<StackPanel>
+<!-- 	<StackPanel>
 		<Button Text="a"  Width="100" Height="100"/>
 		<Button Text="b"  Width="100" Height="100"/>
 		<Button Text="c"/>
 		<Button Text="d"/>
 	</StackPanel>
-<MyNewGraphicsTheme ux:Global="MyGraphics" />
 	<DockPanel>
 		<JavaScript>
-    var Observable = require('FuseJS/Observable');
-    var buttontext = Observable('Gateau');
-    var clickcount = 0;
+		    var Observable = require('FuseJS/Observable');
+		    var buttontext = Observable('Gateau');
+		    var clickcount = 0;
 
-    function click() {
-        buttontext.value = 'J\'ai mange: ' + ++clickcount + ' gateaux';
+		    function click() {
+		        buttontext.value = 'J\'ai mange: ' + ++clickcount + ' gateaux';
+		    }
 
-    }
-
-   module.exports = {
-            buttontext : buttontext,
-            click : click
-        }
-</JavaScript>
+		   	module.exports = {
+	            buttontext : buttontext,
+	            click : click
+	        }
+		</JavaScript>
 		<StatusBarBackground Dock="Top"/>
 		<ScrollView ClipToBounds="true">
 			<StackPanel>
@@ -36,7 +34,58 @@
 	<Rectangle Fill="#000" Width="100" Height="100"/>
 	
 
-	</DockPanel> -->
+	</DockPanel>  -->
+
+	<ClientPanel>
+    <DockPanel>
+      <Grid ColumnCount="2" Dock="Top" Background="#0cf">
+        <Button Text="A">
+          <Clicked>
+            <NavigateTo Target="_a" NavigationContext="_mainNavigation" />
+          </Clicked>
+        </Button>
+        <Button Text="B">
+          <Clicked>
+            <NavigateTo Target="_b" NavigationContext="_mainNavigation" />
+          </Clicked>
+        </Button>
+      </Grid>
+
+      <Panel Dock="Fill">
+
+        <LinearNavigation ux:Name="_mainNavigation" Easing="CubicInOut" />
+
+        <Style>
+          <PageControl ClipToBounds="true">
+            <Style>
+              <Text Alignment="Center" FontSize="30" />
+            </Style>
+            <EnteringAnimation>
+              <Move Y="-1" RelativeTo="Size" />
+            </EnteringAnimation>
+            <ExitingAnimation>
+              <Move Y="1" RelativeTo="Size" />
+            </ExitingAnimation>
+          </PageControl>
+        </Style>
+
+		<MyPageControlA ux:Name="_a"/>
+
+        <PageControl ux:Name="_b">
+          <Page Background="#cf0">
+            <Text Value="B1" />
+          </Page>
+          <Page Background="#0cf">
+            <Text Value="B2" />
+          </Page>
+          <Page Background="#f0c">
+            <Text Value="B3" />
+          </Page>
+        </PageControl>
+
+      </Panel>
+    </DockPanel>
+  </ClientPanel>
 
 </App>
 
