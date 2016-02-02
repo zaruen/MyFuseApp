@@ -1,4 +1,4 @@
-                <PageControl ux:Name="MyPageControlA">
+                <PageControl>
                 	<JavaScript>
                 		var Observable = require('FuseJS/Observable');
 
@@ -52,13 +52,13 @@
         	        </StackPanel>
                   </Page>
                   <Page Background="#0fc">
-                    <!-- <StackPanel>
+                    <StackPanel>
                     	<Text Value="A2" />
                     	<Each Items="{myPerson}">
                     		<Text Value="{name}" />
                     		<Text Value="{age}" />
                     	</Each>
-                    </StackPanel> -->
+                    </StackPanel>
                   </Page>
                   <Page Background="#c0f">
                     <Text Value="A3" />

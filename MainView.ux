@@ -69,7 +69,74 @@
           </PageControl>
         </Style>
 
-		<MyPageControlA ux:Name="_a"/>
+		<!-- <MyPageControlA ux:Name="_a"/> -->
+
+		        <PageControl ux:Name="_a">
+		        	<JavaScript>
+		        		var Observable = require('FuseJS/Observable');
+
+						var myVariable = Observable("some value");
+
+						var lowercase = myVariable.map(function(x){
+							return x.toLowerCase();
+						});
+
+						var uppercase = myVariable.map(function(x){
+							return x.toUpperCase();
+						});
+
+
+						var isThomas = myVariable.map(function(x){
+							return x=="Thomas";
+						});
+
+						function button_clicked(){
+							myVariable.value = "some other value";
+							debug_log(myVariable);
+						}
+
+						function Person(name, age){
+							this.name = name;
+							this.age = age;
+						}
+
+						var myPerson = Observable(
+							new Person("Thomas", 25),
+							new Person("Cassandre", 25)
+						);
+
+						module.exports = {
+							myVariable : myVariable,
+							button_clicked: button_clicked,
+							uppercase : uppercase,
+							lowercase : lowercase,
+							isThomas: isThomas,
+							myPerson : myPerson
+						}
+		        	</JavaScript>
+		          <Page Background="#fc0">
+		          	<StackPanel>
+			            <Text Value="A1" />
+			            <TextInput Value="{myVariable}" />
+			            <Text Value="{uppercase}" />
+			            <Text Value="{lowercase}" />
+			            <Switch Value="{isThomas}" />
+			            <Button Clicked="{button_clicked}" Text="Change the value!" />
+			        </StackPanel>
+		          </Page>
+		          <Page Background="#0fc">
+		            <StackPanel>
+		            	<Text Value="A2" />
+		            	<Each Items="{myPerson}">
+		            		<Text Value="{name}" />
+		            		<Text Value="{age}" />
+		            	</Each>
+		            </StackPanel>
+		          </Page>
+		          <Page Background="#c0f">
+		            <Text Value="A3" />
+		          </Page>
+		        </PageControl>
 
         <PageControl ux:Name="_b">
           <Page Background="#cf0">
