@@ -1,0 +1,10 @@
+<Page Background="#00EAFF" ux:Class="MyPage">
+	<StackPanel>
+	    <Text Value="MyPage" />
+	    <TextInput Value="{myVariable}" />
+	    <Text Value="{uppercase}" />
+	    <Text Value="{lowercase}" />
+	    <Switch Value="{isThomas}" />
+	    <Button Clicked="{button_clicked}" Text="Change the value!" />
+	</StackPanel>
+</Page>

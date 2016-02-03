@@ -3,6 +3,8 @@
                 		var Observable = require('FuseJS/Observable');
 
         				var myVariable = Observable("some value");
+        				var name = Observable("");
+        				var age = Observable("");
 
         				var lowercase = myVariable.map(function(x){
         					return x.toLowerCase();
@@ -32,13 +34,21 @@
         					new Person("Cassandre", 25)
         				);
 
+        				function submit(){
+        					var newPerson = new Person(name, age);
+        					myPerson.add(newPerson);
+        				}
+
         				module.exports = {
         					myVariable : myVariable,
         					button_clicked: button_clicked,
         					uppercase : uppercase,
         					lowercase : lowercase,
         					isThomas: isThomas,
-        					myPerson : myPerson
+        					myPerson : myPerson,
+        					name : name,
+        					age: age,
+        					submit : submit
         				}
                 	</JavaScript>
                   <Page Background="#fc0">
@@ -53,11 +63,15 @@
                   </Page>
                   <Page Background="#0fc">
                     <StackPanel>
-                    	<Text Value="A2" />
+                    	<!-- <Text Value="A2" /> -->
+                    	<StackPanel>
+                    		<TextInput Value="{name}"/>
+                    		<TextInput Value="{age}"/>
+                    		<Button Clicked="{submit}" Text="Submit"/>
+                    	</StackPanel>
                     	<Each Items="{myPerson}">
                     		<Text Value="{name}" />
                     		<Text Value="{age}" />
-                    		<Text Value="yo" />
                     	</Each>
                     </StackPanel>
                   </Page>

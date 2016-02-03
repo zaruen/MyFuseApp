@@ -73,69 +73,109 @@
 
 		        <PageControl ux:Name="_a">
 		        	<JavaScript>
-		        		var Observable = require('FuseJS/Observable');
+                		var Observable = require('FuseJS/Observable');
 
-						var myVariable = Observable("some value");
+        				var myVariable = Observable("some value");
+        				var name = Observable("");
+        				var age = Observable("");
 
-						var lowercase = myVariable.map(function(x){
-							return x.toLowerCase();
-						});
+        				var lowercase = myVariable.map(function(x){
+        					return x.toLowerCase();
+        				});
 
-						var uppercase = myVariable.map(function(x){
-							return x.toUpperCase();
-						});
+        				var uppercase = myVariable.map(function(x){
+        					return x.toUpperCase();
+        				});
 
 
-						var isThomas = myVariable.map(function(x){
-							return x=="Thomas";
-						});
+        				var isThomas = myVariable.map(function(x){
+        					return x=="Thomas";
+        				});
 
-						function button_clicked(){
-							myVariable.value = "some other value";
-							debug_log(myVariable);
-						}
+        				function button_clicked(){
+        					myVariable.value = "some other value";
+        					debug_log(myVariable);
+        				}
 
-						function Person(name, age){
-							this.name = name;
-							this.age = age;
-						}
+        				function Person(name, age){
+        					this.name = name;
+        					this.age = age;
+        				}
 
-						var myPerson = Observable(
-							new Person("Thomas", 25),
-							new Person("Cassandre", 25)
-						);
+        				var myPerson = Observable(
+        					new Person("Thomas", 25),
+        					new Person("Cassandre", 25)
+        				);
 
-						module.exports = {
-							myVariable : myVariable,
-							button_clicked: button_clicked,
-							uppercase : uppercase,
-							lowercase : lowercase,
-							isThomas: isThomas,
-							myPerson : myPerson
-						}
-		        	</JavaScript>
-		          <Page Background="#fc0">
-		          	<StackPanel>
-			            <Text Value="A1" />
-			            <TextInput Value="{myVariable}" />
-			            <Text Value="{uppercase}" />
-			            <Text Value="{lowercase}" />
-			            <Switch Value="{isThomas}" />
-			            <Button Clicked="{button_clicked}" Text="Change the value!" />
-			        </StackPanel>
-		          </Page>
-		          <Page Background="#0fc">
-		            <StackPanel>
-		            	<Text Value="A2" />
-		            	<Each Items="{myPerson}">
-		            		<Text Value="{name}" />
-		            		<Text Value="{age}" />
-		            	</Each>
-		            </StackPanel>
-		          </Page>
-		          <Page Background="#c0f">
-		            <Text Value="A3" />
-		          </Page>
+        				var listUppercase = myPerson
+        				.map(function(x){
+							return new Person(x.name.toUpperCase(), x.age);
+        				})
+        				.where(function(x){
+        					return x.age > 30;
+        				});
+
+        				function submit(){
+        					var newPerson = new Person(name.value, age.value);
+        					myPerson.add(newPerson);
+        					name.value="";
+        					age.value="";
+        				}
+
+        				module.exports = {
+        					myVariable : myVariable,
+        					button_clicked: button_clicked,
+        					uppercase : uppercase,
+        					lowercase : lowercase,
+        					isThomas: isThomas,
+        					myPerson : myPerson,
+        					name : name,
+        					age: age,
+        					submit : submit,
+        					listUppercase : listUppercase
+        				}
+                	</JavaScript>
+                	<MyPage />
+                  <Page Background="#fc0">
+
+                  	<StackPanel>
+        	            <Text Value="A1" />
+        	            <TextInput Value="{myVariable}" />
+        	            <Text Value="{uppercase}" />
+        	            <Text Value="{lowercase}" />
+        	            <Switch Value="{isThomas}" />
+        	            <Button Clicked="{button_clicked}" Text="Change the value!" />
+        	        </StackPanel>
+                  </Page>
+                  <Page Background="#0fc">
+                  	<ScrollViewer>
+	                    <StackPanel>
+	                    	<StackPanel>
+	                    		<TextInput Value="{name}"/>
+	                    		<TextInput Value="{age}"/>
+	                    		<Button Clicked="{submit}" Text="Submit"/>
+	                    	</StackPanel>
+	                    <!-- 	<StackPanel>
+			                	<Each Items="{listUppercase}">
+			                		<Text Value="{name}" />
+			                		<Text Value="{age}" />
+			                	</Each>
+		                	</StackPanel> -->
+		                	<Text Value="Full list" TextColor="#F88585" FontSize="12"/>
+		                	<StackPanel>	                		
+			                	<Each Items="{myPerson}">
+			                		<StackPanel Orientation="Horizontal" Padding="40,0,40,0">
+				                		<Text Value="{name}" />
+				                		<Text Value="{age}" Margin="20"/>
+			                		</StackPanel>
+			                	</Each>
+		                	</StackPanel>
+	                    </StackPanel>
+	                </ScrollViewer>
+                  </Page>
+                  <Page Background="#c0f">
+                    <Text Value="A3" />
+                  </Page>
 		        </PageControl>
 
         <PageControl ux:Name="_b">
